@@ -17,15 +17,10 @@ public class LottoServiceImpl implements LottoServiece {
 	
 	@Override
 	public void createLotto(LottoBean lb) {
-		int[] lotteryNums = new int[6];
-		lotteryNums = lottomaker(6);
-		int[] balls = new int[6];
-		balls= lottomaker(6);
-		
 		
 		LottoBean param = new LottoBean();
-		param.setBall(lotto2String(balls));
-		param.setLotteryNum(lotto2String(lotteryNums));
+		param.setBall(lotto2String(lottomaker(6)));
+		param.setLotteryNum(lotto2String(lottomaker(6)));
 		param.setLottoSeq(lottoSeq());
 		
 		dao.insertLotto(param);
