@@ -19,14 +19,14 @@ public class LottoServiceImpl implements LottoServiece {
 	public void createLotto(LottoBean lb) {
 		
 		LottoBean param = new LottoBean();
-		param.setBall(lotto2String(lottomaker(6)));
-		param.setLotteryNum(lotto2String(lottomaker(6)));
+		param.setBall(lotto2String(sort(lottomaker(6))));
+		param.setLotteryNum(lotto2String(sort(lottomaker(6))));
 		param.setLottoSeq(lottoSeq());
 		
 		dao.insertLotto(param);
 		
 	}
-//ottoSeq, ball, lotteryNum;
+	
 	public String lottoSeq() {
 		Random rd = new Random();
 		String result="";
@@ -35,7 +35,6 @@ public class LottoServiceImpl implements LottoServiece {
 		}
 		return result;
 	}
-	
 	
 	public int[] lottomaker (int cnt) {
 		
@@ -49,8 +48,6 @@ public class LottoServiceImpl implements LottoServiece {
 				}				
 			}
 		}
-		
-		Arrays.sort(temp);
 		return temp;
 	}
 	
@@ -62,5 +59,20 @@ public class LottoServiceImpl implements LottoServiece {
 		}
 		return result;
 	}
+	
+	public int[] sort(int[] param) {
+		
+		for (int i = 0; i < param.length-1; i++) {
+			for (int j = i+1; j < param.length; j++) {
+				if (param[i] > param[j]) {
+					int temp = param[i];
+					param[i] = param[j];
+					param[j] = temp;
+				}
+			}
+		}
+		return param;
+	}
+	
 	
 }
