@@ -1,6 +1,5 @@
 package com.lotto.web.serviceImpl;
 
-import java.util.Arrays;
 import java.util.Random;
 
 import com.lotto.web.daoImpls.LottoDaoImpl;
@@ -36,19 +35,29 @@ public class LottoServiceImpl implements LottoServiece {
 		return result;
 	}
 	
+	// 중복 제거한 로또 번호 생성기. 중복체크 함수 분리.
 	public int[] lottomaker (int cnt) {
 		
 		int[] temp = new int[cnt];
 		for (int i = 0; i < temp.length; i++) {
 			temp[i] = (int)(Math.random()*45+1);
-			for (int j = 0; j < i; j++) {
-				if (temp[j]== temp[i]) {
-					i--;
-					break;
-				}				
+			if (!exist(temp,i)) {
+				i--;
 			}
 		}
 		return temp;
+	}
+	
+	// 중복 확인 함수 분리
+	public boolean exist(int[] param, int cnt) {
+		boolean result= true;
+		for (int j = 0; j < cnt; j++) {
+			if (param[j]== param[cnt]) {
+				result = false;
+				break;
+			}				
+		}
+		return result;
 	}
 	
 	public String lotto2String (int[] param) {
@@ -60,6 +69,7 @@ public class LottoServiceImpl implements LottoServiece {
 		return result;
 	}
 	
+	//소트 함수
 	public int[] sort(int[] param) {
 		
 		for (int i = 0; i < param.length-1; i++) {
