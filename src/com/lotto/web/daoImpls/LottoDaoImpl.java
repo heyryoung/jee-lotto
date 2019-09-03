@@ -23,7 +23,7 @@ public class LottoDaoImpl implements LottoDao{
 	
 	//lottoSeq < 일련번호, ball < (랜덤1~45번) , lotteryNum < 당첨번호 
 	@Override
-	public void inertLotto(LottoBean param) {
+	public void insertLotto(LottoBean param) {
 		
 		try {
 			File file = new File(FILE_PATH+"lotto.txt");
